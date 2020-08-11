@@ -7,8 +7,7 @@ class Player:
         for x in range(7):
             self.mano.append(fichas.pop(randrange(len(fichas))))
 
-    
-    def play():
+     def play():
         pass
 
     def win():
@@ -45,6 +44,12 @@ class Ficha():
             return True
         return False
 
+    def spin(self):
+        x = self.value2
+        y = self.value1
+        self.value1 = x
+        self.value2 = y
+
     @property
     def value(self):
         return [self.value1, self.value2]
@@ -75,4 +80,3 @@ class Ficha():
 class Tablero():
     arriba = []
     abajo = []
-
