@@ -1,1 +1,4 @@
-print ("Hola Mundo")
+class Tablero:
+
+    def __init__(self):
+        self.tablero = []
