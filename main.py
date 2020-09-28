@@ -1,18 +1,17 @@
 from random import randrange
 
 class Player:
-    def __init__(self, id, fichas):
-        self.id = id
+    def __init__(self, name, fichas):
+        self.name = name
         self.mano = []
-        for x in range(7):
+        i = 0
+        while (i < 7):
             self.mano.append(fichas.pop(randrange(len(fichas))))
+            i += 1
 
-     def play():
+    def jugar(self, ficha):
         pass
 
-    def win():
-        pass
-    
     def verDobles(self):
         dobles = []
         for x in range(len(self.mano)):
@@ -22,13 +21,16 @@ class Player:
             return dobles
         else:
             return None
-
+    
     @property
     def verMano(self):
         verMano = []
         for x in range(len(self.mano)):
             verMano.append(self.mano[x].value)
         return verMano
+
+    def __repr__(self):
+        return self.name
 
 class Ficha():
 
@@ -76,7 +78,24 @@ class Ficha():
         return fichas
 
 
-
 class Tablero():
-    arriba = []
-    abajo = []
+
+    def __init__(self):
+        self.tablero = []
+
+    def verTablero(self):
+        return self.tablero
+
+    def jugada(self, ficha):
+        self.tablero.append(ficha)
+    
+    @staticmethod
+    def buscar_doblep4(p1, p2, p3, p4):
+        ps = [p1, p2, p3, p4]
+        for x in range(4):
+            doubles = ps[x].verDobles()
+            if (doubles):
+                for y in doubles: 
+                    if (y.value1 == 6):
+                        print (y, x)
+                        return ps[x]
