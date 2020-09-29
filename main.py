@@ -20,3 +20,6 @@ class Fichas:
 
     def __repr__ (self):
         return "[{},{}]".format(self.valor1,self.valor2)
+
+    def voltear (self):
+        self.valor1, self.valor2 = self.valor2, self.valor1
