@@ -6,3 +6,6 @@ class Tablero:
     
     def verMesa (self):
         return self.tablero
+
+    def jugarFichaAlFinal(self, ficha):
+        self.tablero.append(ficha)
