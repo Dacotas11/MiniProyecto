@@ -49,8 +49,13 @@ class Fichas:
 
 class Jugador:
 
-    def __init__ (self, nombre, fichas):
-        self.nombre, self.fichas = nombre, fichas
+    def __init__ (self, nombre, fichasMesa):
+        self.nombre = nombre
+        self.fichas = []
+        i = 0
+        while (i < 7):
+            self.fichas.append(fichasMesa.pop(randrange(len(fichasMesa))))
+            i += 1
 
     def __repr__ (self):
         return self.nombre
