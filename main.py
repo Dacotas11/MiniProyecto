@@ -68,3 +68,8 @@ class Jugador:
 
     def voltearFicha(self, posicion):
         self.fichas[posicion - 1].voltear()
+
+    def tieneFichas(self):
+        if (self.fichas):
+            return True
+        return False
