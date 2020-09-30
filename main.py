@@ -65,3 +65,6 @@ class Jugador:
 
     def jugarFicha (self, posicion):
         return self.fichas.pop(posicion - 1)
+
+    def voltearFicha(self, posicion):
+        self.fichas[posicion - 1].voltear()
