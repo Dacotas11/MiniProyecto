@@ -73,3 +73,26 @@ class Jugador:
         if (self.fichas):
             return True
         return False
+
+class Juego:
+
+    @staticmethod
+    def esJugable(mesa, ficha, fichasEnMesa):
+        if (fichasEnMesa):
+            if (fichasEnMesa == 1):
+                if (ficha[0] == mesa[0][0] or ficha[0] == mesa[0][1]):  
+                    return True
+                if (ficha[1] == mesa[0][0] or ficha[1] == mesa[0][1]):
+                    return True
+                else:
+                    return False
+    
+            if (fichasEnMesa > 1):
+                if (ficha[0] == mesa[0][0] or ficha[0] == mesa[len(mesa) - 1][1]):
+                    return True
+                if (ficha[1] == mesa[0][0] or ficha[1] == mesa[0][1]):
+                    return True
+                else:
+                    return False
+            else:
+                return True
