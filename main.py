@@ -14,6 +14,15 @@ class Tablero:
     def jugarFichaAlInicio (self, ficha):
         self.tablero.insert(0, ficha)
 
+    def lenTablero(self):
+        return len(self.tablero)
+
+    def extremosMesa (self):
+        if (self.tablero):
+            a = [self.tablero[0].valor1, self.tablero[self.lenTablero() - 1].valor2]
+            return a
+        return None
+
 
 class Fichas:
 
@@ -25,6 +34,10 @@ class Fichas:
 
     def voltear (self):
         self.valor1, self.valor2 = self.valor2, self.valor1
+
+    @property
+    def valores(self):
+        return [self.valor1, self.valor2]
 
     @classmethod
     def from_list(cls, list):
@@ -78,21 +91,28 @@ class Juego:
 
     @staticmethod
     def esJugable(mesa, ficha, fichasEnMesa):
-        if (fichasEnMesa):
-            if (fichasEnMesa == 1):
-                if (ficha[0] == mesa[0][0] or ficha[0] == mesa[0][1]):  
-                    return True
-                if (ficha[1] == mesa[0][0] or ficha[1] == mesa[0][1]):
-                    return True
-                else:
-                    return False
-    
-            if (fichasEnMesa > 1):
-                if (ficha[0] == mesa[0][0] or ficha[0] == mesa[len(mesa) - 1][1]):
-                    return True
-                if (ficha[1] == mesa[0][0] or ficha[1] == mesa[0][1]):
-                    return True
-                else:
-                    return False
-            else:
+        if (mesa.tablero):
+            if (ficha.valor1 == mesa.extremosMesa()[0] or ficha.valor1 == mesa.extremosMesa()[1]):  
                 return True
+            if (ficha.valor2 == mesa.extremosMesa()[0] or ficha.valor2 == mesa.extremosMesa()[1]):
+                return True
+            else:
+                return False
+        else:
+            return True
+
+    @staticmethod
+    def esJugableAlInicio(mesa, ficha, fichasEnMesa):
+        if (mesa.tablero):
+            if (ficha.valor2 == mesa.extremosMesa()[0]):
+                return True
+            return False
+        return True
+
+    @staticmethod
+    def esJugableAlFinal(mesa, ficha, fichasEnMesa):
+        if (mesa.tablero):
+            if (ficha.valor1 == mesa.extremosMesa()[1]):
+                return True
+            return False
+        return True
