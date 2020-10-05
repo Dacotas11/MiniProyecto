@@ -78,12 +78,15 @@ class Jugador:
     def __repr__ (self):
         return self.nombre
 
+    def lenMano(self):
+        return len(self.fichas)
+    
     def verMano (self):
         return self.fichas
 
     def verDobles(self):
         dobles = []
-        for x in range(len(self.fichas)):
+        for x in range(self.lenMano()):
             if (self.fichas[x].esDoble()):
                 dobles.append(self.fichas[x])
         if (dobles):
