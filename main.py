@@ -35,6 +35,11 @@ class Fichas:
     def voltear (self):
         self.valor1, self.valor2 = self.valor2, self.valor1
 
+    def esDoble(self):
+        if (self.valor1 == self.valor2):
+            return True
+        return False
+
     @property
     def valores(self):
         return [self.valor1, self.valor2]
@@ -76,6 +81,15 @@ class Jugador:
     def verMano (self):
         return self.fichas
 
+    def verDobles(self):
+        dobles = []
+        for x in range(len(self.fichas)):
+            if (self.fichas[x].esDoble()):
+                dobles.append(self.fichas[x])
+        if (dobles):
+            return dobles
+        return None
+    
     def jugarFicha (self, posicion):
         return self.fichas.pop(posicion - 1)
 
@@ -107,7 +121,9 @@ class Juego:
             if (ficha.valor2 == mesa.extremosMesa()[0]):
                 return True
             return False
-        return True
+        if (ficha.valor1 == 6 and ficha.valor2 == 6):
+            return True
+        return False
 
     @staticmethod
     def esJugableAlFinal(mesa, ficha, fichasEnMesa):
@@ -115,4 +131,6 @@ class Juego:
             if (ficha.valor1 == mesa.extremosMesa()[1]):
                 return True
             return False
-        return True
+        if (ficha.valor1 == 6 and ficha.valor2 == 6):
+            return True
+        return False
