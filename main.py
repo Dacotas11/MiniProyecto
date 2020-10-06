@@ -184,7 +184,7 @@ class Juego:
                         break
 
                     if (b == 8):
-                        print ("\n \n \n \n \n \n \n \n \n \nEl {} no va\n".format(ps[a]))
+                        print ("\n \n \n \n \n \n \n \n \n \n{} no va\n".format(ps[a]))
                         a += 1
                         if (a == 4):
                             a = 0
@@ -213,7 +213,7 @@ class Juego:
                                 self.mesa.jugarFichaAlFinal(ps[a].jugarFicha(b))
                                 print ("\n \n \n \n \n \n \n \n \n \n")
                                 if (not ps[a].tieneFichas()):
-                                    print ("Gano el {}".format(ps[a]))
+                                    print ("Gano {}".format(ps[a]))
                                     break
                                 a += 1
                             else:
