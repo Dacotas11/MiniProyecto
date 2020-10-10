@@ -120,13 +120,17 @@ class Juego:
         self.jugador4 = Jugador(p4, self.fichas)
 
     def buscar_doblep4(self):
-        ps = [self.jugador1, self.jugador2, self.jugador3, self.jugador4]
+        jugadores = self.jugadores
         for x in range(4):
-            dobles = ps[x].verDobles()
+            dobles = jugadores[x].verDobles()
             if (dobles):
                 for y in dobles:
                     if (y.valor1 == 6):
                         return x
+
+    @property
+    def jugadores(self):
+        return [self.jugador1, self.jugador2, self.jugador3, self.jugador4]
 
     @staticmethod
     def esJugable(mesa, ficha, fichasEnMesa):
@@ -161,7 +165,7 @@ class Juego:
         return False
 
     def iniciarJuego(self):
-        ps = [self.jugador1, self.jugador2, self.jugador3, self.jugador4]
+        jugadores = self.jugadores
         a = self.buscar_doblep4()
         print ("\n\n\n\n\n\n\n")
         while (True):
@@ -170,9 +174,9 @@ class Juego:
                 
                 print ("Tablero {}\n\n".format(self.mesa.verMesa()))
                 
-                if (ps[a].tieneFichas()):
-                    print ("Es el turno de",ps[a])
-                    print (ps[a].verMano())
+                if (jugadores[a].tieneFichas()):
+                    print ("Es el turno de",jugadores[a])
+                    print (jugadores[a].verMano())
                     
                     b = int(input("Selecciona que ficha jugar\n "))
                     
@@ -182,36 +186,36 @@ class Juego:
                         break
 
                     if (b == 8):
-                        print ("\n \n \n \n \n \n \n \n \n \n{} no va\n".format(ps[a]))
+                        print ("\n \n \n \n \n \n \n \n \n \n{} no va\n".format(jugadores[a]))
                         a += 1
                         if (a == 4):
                             a = 0
                     
-                    if (b > 0 and b <= ps[a].lenMano()):
+                    if (b > 0 and b <= jugadores[a].lenMano()):
                         c = int(input("Flip Si o NO(1/2)\n"))
                         d = int(input("\nprincipio o final(1/2)\n"))
                 
-                    if (b > 0 and b <= ps[a].lenMano()):
+                    if (b > 0 and b <= jugadores[a].lenMano()):
                         if (c == 1):
-                            ps[a].voltearFicha(b)
+                            jugadores[a].voltearFicha(b)
 
                         if(d == 1):
-                            if (self.esJugableAlInicio(self.mesa, ps[a].fichas[b - 1], self.mesa.lenTablero())):
-                                self.mesa.jugarFichaAlInicio(ps[a].jugarFicha(b))
+                            if (self.esJugableAlInicio(self.mesa, jugadores[a].fichas[b - 1], self.mesa.lenTablero())):
+                                self.mesa.jugarFichaAlInicio(jugadores[a].jugarFicha(b))
                                 print ("\n \n \n \n \n \n \n \n \n \n")
-                                if (not ps[a].tieneFichas()):
-                                    print ("\n \n \n \n \n \n \n \nGano {}!!!!".format(ps[a]))
+                                if (not jugadores[a].tieneFichas()):
+                                    print ("\n \n \n \n \n \n \n \nGano {}!!!!".format(jugadores[a]))
                                     break
                                 a += 1
                             else:
                                 print ("\n \n \n \n \n\n\n\n\nNo es Jugable\n")
 
                         if(d == 2):
-                            if (self.esJugableAlFinal(self.mesa, ps[a].fichas[b - 1], self.mesa.lenTablero())):
-                                self.mesa.jugarFichaAlFinal(ps[a].jugarFicha(b))
+                            if (self.esJugableAlFinal(self.mesa, jugadores[a].fichas[b - 1], self.mesa.lenTablero())):
+                                self.mesa.jugarFichaAlFinal(jugadores[a].jugarFicha(b))
                                 print ("\n \n \n \n \n \n \n \n \n \n")
-                                if (not ps[a].tieneFichas()):
-                                    print ("Gano {}".format(ps[a]))
+                                if (not jugadores[a].tieneFichas()):
+                                    print ("Gano {}!!!!!".format(jugadores[a]))
                                     break
                                 a += 1
                             else:
