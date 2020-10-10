@@ -3,23 +3,23 @@ from random import randrange
 class Tablero:
 
     def __init__ (self):
-        self.tablero = []
+        self.estado = []
 
     def verMesa (self):
-        return self.tablero
+        return self.estado
 
     def jugarFichaAlFinal (self, ficha):
-        self.tablero.append(ficha)
+        self.estado.append(ficha)
 
     def jugarFichaAlInicio (self, ficha):
-        self.tablero.insert(0, ficha)
+        self.estado.insert(0, ficha)
 
     def lenTablero(self):
-        return len(self.tablero)
+        return len(self.estado)
 
     def extremosMesa (self):
-        if (self.tablero):
-            a = [self.tablero[0].valor1, self.tablero[self.lenTablero() - 1].valor2]
+        if (self.estado):
+            a = [self.estado[0].valor1, self.estado[self.lenTablero() - 1].valor2]
             return a
         return None
 
@@ -36,9 +36,7 @@ class Fichas:
         self.valor1, self.valor2 = self.valor2, self.valor1
 
     def esDoble(self):
-        if (self.valor1 == self.valor2):
-            return True
-        return False
+        return self.valor1 == self.valor2
 
     @property
     def valores(self):
@@ -86,10 +84,10 @@ class Jugador:
 
     def verDobles(self):
         dobles = []
-        for x in range(self.lenMano()):
-            if (self.fichas[x].esDoble()):
-                dobles.append(self.fichas[x])
-        if (dobles):
+        for ficha in self.fichas:
+            if (ficha.esDoble()):
+                dobles.append(ficha)
+        if (dobles):    
             return dobles
         return None
     
@@ -132,7 +130,7 @@ class Juego:
 
     @staticmethod
     def esJugable(mesa, ficha, fichasEnMesa):
-        if (mesa.tablero):
+        if (mesa.estado):
             if (ficha.valor1 == mesa.extremosMesa()[0] or ficha.valor1 == mesa.extremosMesa()[1]):  
                 return True
             if (ficha.valor2 == mesa.extremosMesa()[0] or ficha.valor2 == mesa.extremosMesa()[1]):
@@ -144,7 +142,7 @@ class Juego:
 
     @staticmethod
     def esJugableAlInicio(mesa, ficha, fichasEnMesa):
-        if (mesa.tablero):
+        if (mesa.estado):
             if (ficha.valor2 == mesa.extremosMesa()[0]):
                 return True
             return False
@@ -154,7 +152,7 @@ class Juego:
 
     @staticmethod
     def esJugableAlFinal(mesa, ficha, fichasEnMesa):
-        if (mesa.tablero):
+        if (mesa.estado):
             if (ficha.valor1 == mesa.extremosMesa()[1]):
                 return True
             return False
@@ -233,7 +231,7 @@ class Juego:
                     self.iniciarJuego()
 
                 if (inicio == 2):
-                    print ("\n\n\n\nPara jugar primero elige una de las fichas, despues te va a presentar la opcion de hacerle flip si o no\ny despues seleccionar si quieres jugar al principio o al final del tablero\nsi no vas presiona 8\n\nNOTA: Todo se elige en numeros")
+                    print ("\n\n\n\nPara jugar primero elige una de las fichas, despues te va a presentar la opcion de hacerle flip si o no\ny despues seleccionar si quieres jugar al principio o al final del Tablero\nsi no vas presiona 8\n\nNOTA: Todo se elige en numeros")
 
                 if (inicio == 0):
                     print ("\n\n\n\n\n\n\n\n\n\n\n\n\nMuchas Gracias")
