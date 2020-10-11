@@ -32,6 +32,9 @@ class Fichas:
     def __repr__ (self):
         return "[{},{}]".format(self.valor1,self.valor2)
 
+    def sumaValores(self):
+        return self.valor1 + self.valor2
+
     def voltear (self):
         self.valor1, self.valor2 = self.valor2, self.valor1
 
@@ -75,6 +78,12 @@ class Jugador:
 
     def __repr__ (self):
         return self.nombre
+
+    def sumaMano(self):
+        suma = []
+        for ficha in self.fichas:
+            suma.append(ficha.sumaValores())
+        return sum(suma)
 
     def lenMano(self):
         return len(self.fichas)
@@ -128,6 +137,20 @@ class Juego:
                     if (y.valor1 == 6):
                         return x
 
+    def hayTranque(self):
+        for jugador in self.jugadores:
+            for ficha in jugador.fichas:
+                if (self.esJugable(self.mesa, ficha, self.mesa.lenTablero)):
+                    return False
+        return True
+
+    def ganadorPorTranque(self):
+        ganador = self.jugador1
+        for jugador in self.jugadores:
+            if (jugador.sumaMano() < ganador.sumaMano()):
+                ganador = jugador
+        return ganador
+                
     @property
     def jugadores(self):
         return [self.jugador1, self.jugador2, self.jugador3, self.jugador4]
@@ -169,6 +192,9 @@ class Juego:
         a = self.buscar_doblep4()
         print ("\n\n\n\n\n\n\n")
         while (True):
+            if (self.hayTranque()):
+                print ("El ganador por tranque es {}!!!".format(self.ganadorPorTranque()))
+                break
             try:
                 if (a == 4): a = 0
                 
