@@ -121,15 +121,21 @@ class Juego:
         self.fichas = Fichas.crearFichas()
         
     def crearJugadores(self):
+        self.jugador1 = Jugador("Jugador 1", self.fichas)
+        self.jugador2 = Jugador("Jugador 2", self.fichas)
+        self.jugador3 = Jugador("Jugador 3", self.fichas)
+        self.jugador4 = Jugador("Jugador 4", self.fichas)
+
+    def nombrarJugadores(self):
         p1 = input("Inserta el nombre del primer jugador: ")
         p2 = input("Inserta el nombre del segundo jugador: ")
         p3 = input("Inserta el nombre del tercer jugador: ")
         p4 = input("Inserta el nombre del cuarto jugador: ")
 
-        self.jugador1 = Jugador(p1, self.fichas)
-        self.jugador2 = Jugador(p2, self.fichas)
-        self.jugador3 = Jugador(p3, self.fichas)
-        self.jugador4 = Jugador(p4, self.fichas)
+        self.jugador1.nombre = p1
+        self.jugador2.nombre = p2
+        self.jugador3.nombre = p3
+        self.jugador4.nombre = p4
 
     def buscar_doblep4(self):
         jugadores = self.jugadores
@@ -175,7 +181,6 @@ class Juego:
         if (mesa.estado):
             if (ficha.valor2 == mesa.extremosMesa()[0]):
                 return True
-            return False
         if (ficha.valor1 == 6 and ficha.valor2 == 6):
             return True
         return False
@@ -185,7 +190,6 @@ class Juego:
         if (mesa.estado):
             if (ficha.valor1 == mesa.extremosMesa()[1]):
                 return True
-            return False
         if (ficha.valor1 == 6 and ficha.valor2 == 6):
             return True
         return False
@@ -256,6 +260,9 @@ class Juego:
 
     def inicio(self):
         self.crearJugadores()
+        decision = int(input("Presiona 1 si quiere nombrar los jugadores y 2 si desea dejarlos de forma generica: "))
+        if (decision == 1):
+            self.nombrarJugadores()
         while (True):
             try:
                 print ("\n\nEste es un juego de Domino\nPresiona 1 para jugar\n2 para ver como jugar\n0 para salir del juego")
@@ -264,7 +271,7 @@ class Juego:
                     self.iniciarJuego()
 
                 if (inicio == 2):
-                    print ("\n\n\n\nPara jugar primero elige una de las fichas, despues te va a presentar la opcion de hacerle flip si o no\ny despues seleccionar si quieres jugar al principio o al final del Tablero\nsi no vas presiona 8\n\nNOTA: Todo se elige en numeros")
+                    print ("\n\n\n\nPara jugar primero elige una de las fichas, despues te va a presentar la opcion de hacerle flip si o no\ny despues seleccionar si quieres jugar al principio o al final del Tablero\nsi no puedes jugar presiona 8\n\nNOTA: Todo se elige en numeros")
 
                 if (inicio == 0):
                     print ("\n\n\n\n\n\n\n\n\n\n\n\n\nMuchas Gracias")
