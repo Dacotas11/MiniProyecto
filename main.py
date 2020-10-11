@@ -91,6 +91,9 @@ class Jugador:
     def verMano (self):
         return self.fichas
 
+    def verManoConIndice(self):
+        return list(enumerate(self.fichas, 1))
+
     def verDobles(self):
         dobles = []
         for ficha in self.fichas:
@@ -202,7 +205,7 @@ class Juego:
                 
                 if (jugadores[a].tieneFichas()):
                     print ("Es el turno de",jugadores[a])
-                    print (jugadores[a].verMano())
+                    print (jugadores[a].verManoConIndice())
                     
                     b = int(input("Selecciona que ficha jugar\n "))
                     
