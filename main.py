@@ -154,6 +154,12 @@ class Juego:
                     return False
         return True
 
+    def puedeJugar(self, jugador):
+        for ficha in jugador.fichas:
+            if (self.esJugable(self.mesa, ficha, self.mesa.lenTablero)):
+                return True
+        return False
+
     def ganadorPorTranque(self):
         ganador = self.jugador1
         for jugador in self.jugadores:
@@ -205,6 +211,9 @@ class Juego:
                 break
             try:
                 if (a == 4): a = 0
+             
+                if (not self.puedeJugar(jugadores[a])):
+                    a += 1
                 
                 print ("Tablero {}\n\n".format(self.mesa.verMesa()))
                 
