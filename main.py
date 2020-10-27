@@ -213,7 +213,9 @@ class Juego:
                 if (a == 4): a = 0
              
                 if (not self.puedeJugar(jugadores[a])):
+                    print ("{} no va.".format(jugadores[a]))
                     a += 1
+                    continue
                 
                 print ("Tablero {}\n\n".format(self.mesa.verMesa()))
                 
