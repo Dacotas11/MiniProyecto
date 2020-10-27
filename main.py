@@ -17,6 +17,7 @@ class Tablero:
     def lenTablero(self):
         return len(self.estado)
 
+    @property
     def extremosMesa (self):
         if (self.estado):
             a = [self.estado[0].valor1, self.estado[self.lenTablero() - 1].valor2]
@@ -159,17 +160,23 @@ class Juego:
             if (jugador.sumaMano() < ganador.sumaMano()):
                 ganador = jugador
         return ganador
-                
+
     @property
     def jugadores(self):
         return [self.jugador1, self.jugador2, self.jugador3, self.jugador4]
 
     @staticmethod
+    def esPrimeroEnJugar(ficha):
+        if (ficha.valor1 == 6 and ficha.valor2 == 6):
+            return True
+        return False
+
+    @staticmethod
     def esJugable(mesa, ficha, fichasEnMesa):
         if (mesa.estado):
-            if (ficha.valor1 == mesa.extremosMesa()[0] or ficha.valor1 == mesa.extremosMesa()[1]):  
+            if (ficha.valor1 == mesa.extremosMesa[0] or ficha.valor1 == mesa.extremosMesa[1]):  
                 return True
-            if (ficha.valor2 == mesa.extremosMesa()[0] or ficha.valor2 == mesa.extremosMesa()[1]):
+            if (ficha.valor2 == mesa.extremosMesa[0] or ficha.valor2 == mesa.extremosMesa[1]):
                 return True
             else:
                 return False
@@ -178,21 +185,15 @@ class Juego:
 
     @staticmethod
     def esJugableAlInicio(mesa, ficha, fichasEnMesa):
-        if (mesa.estado):
-            if (ficha.valor2 == mesa.extremosMesa()[0]):
-                return True
-        if (ficha.valor1 == 6 and ficha.valor2 == 6):
+        if (mesa.estado and ficha.valor2 == mesa.extremosMesa[0]):
             return True
-        return False
+        return Juego.esPrimeroEnJugar(ficha)
 
     @staticmethod
     def esJugableAlFinal(mesa, ficha, fichasEnMesa):
-        if (mesa.estado):
-            if (ficha.valor1 == mesa.extremosMesa()[1]):
-                return True
-        if (ficha.valor1 == 6 and ficha.valor2 == 6):
+        if (mesa.estado and ficha.valor1 == mesa.extremosMesa[1]):
             return True
-        return False
+        return Juego.esPrimeroEnJugar(ficha)
 
     def iniciarJuego(self):
         jugadores = self.jugadores
