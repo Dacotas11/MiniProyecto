@@ -47,35 +47,22 @@ class Fichas:
         return [self.valor1, self.valor2]
 
     @classmethod
-    def from_list(cls, list):
-        return cls(list[0], list[1])
-
-    @staticmethod
-    def crearFichas():
-        lista = []
+    def crearFichas(cls):
+        lista = [[l,r] for l in range(0,7) for r in range(l, 7)]
         fichas = []
-        a = 7
-        b = 8
-        while (a > 0):
-            a -= 1
-            b -= 1
-            for y in range(b):
-                lista.append([a, y])
-        
-        for x in lista:
-            fichas.append(Fichas.from_list(x))
+        for ficha in lista:
+            fichas.append(cls(ficha[0],ficha[1]))
         return fichas
 
 
 class Jugador:
 
-    def __init__ (self, nombre, fichasMesa):
+    def __init__ (self, nombre):
         self.nombre = nombre
         self.fichas = []
-        i = 0
-        while (i < 7):
-            self.fichas.append(fichasMesa.pop(randrange(len(fichasMesa))))
-            i += 1
+
+    def asignarFichas(self, mano):
+        self.fichas = mano
 
     def __repr__ (self):
         return self.nombre
@@ -120,23 +107,23 @@ class Juego:
     def __init__(self):
         self.mesa = Tablero()
         self.fichas = Fichas.crearFichas()
-        
+        self.jugador1 = Jugador("Jugador 1")
+        self.jugador2 = Jugador("Jugador 2")
+        self.jugador3 = Jugador("Jugador 3")
+        self.jugador4 = Jugador("Jugador 4")
+
     def crearJugadores(self):
-        self.jugador1 = Jugador("Jugador 1", self.fichas)
-        self.jugador2 = Jugador("Jugador 2", self.fichas)
-        self.jugador3 = Jugador("Jugador 3", self.fichas)
-        self.jugador4 = Jugador("Jugador 4", self.fichas)
+        for jugador in self.jugadores:
+            fichasJugador = []
+            for i in range(7):
+                fichasJugador.append(self.fichas.pop(randrange(len(self.fichas))))
+            jugador.asignarFichas(fichasJugador)
 
     def nombrarJugadores(self):
-        p1 = input("Inserta el nombre del primer jugador: ")
-        p2 = input("Inserta el nombre del segundo jugador: ")
-        p3 = input("Inserta el nombre del tercer jugador: ")
-        p4 = input("Inserta el nombre del cuarto jugador: ")
-
-        self.jugador1.nombre = p1
-        self.jugador2.nombre = p2
-        self.jugador3.nombre = p3
-        self.jugador4.nombre = p4
+        self.jugador1.nombre = input("Inserta el nombre del primer jugador: ")
+        self.jugador2.nombre = input("Inserta el nombre del segundo jugador: ")
+        self.jugador3.nombre = input("Inserta el nombre del tercer jugador: ")
+        self.jugador4.nombre = input("Inserta el nombre del cuarto jugador: ")
 
     def buscar_doblep4(self):
         jugadores = self.jugadores
