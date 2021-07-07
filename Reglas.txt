@@ -1,0 +1,19 @@
+""" Este es un juego de domino como funciona esto es de la siguiente manera:
+Para jugar al dominó son necesarias 28 fichas rectangulares. Cada ficha está dividida en 2 espacios iguales en los que aparece una cifra de 0 hasta 6. Las fichas cubren todas las combinaciones posibles con estos números.
+
+Se puede jugar con 2, 3 ó 4 jugadores o por parejas.
+
+El objetivo del juego es colocar todas tus fichas en la mesa antes que los contrarios y sumar puntos. El jugador que gana una ronda, suma puntos según las fichas que no han podido colocar los oponentes.
+
+La partida termina cuando un jugador o pareja alcanza la cantidad de puntos indicada en las opciones de mesa.
+
+Cada jugador recibe 7 fichas al empezar una ronda. Si en la partida hay menos de 4 jugadores, las fichas restantes se guardan en el pozo.
+
+Inicia la ronda el jugador que tenga la ficha con el doble más alto (si juegan 4 personas, siempre empezará el 6 doble). En caso de no tener dobles ninguno de los jugadores, comenzará el jugador que tenga la ficha más alta. A partir de ese momento, los jugadores realizarán su jugada, por turnos, siguiendo el orden inverso a las manecillas del reloj.
+
+El jugador que inicia la ronda lleva la mano. Este es un concepto importante para la estrategia del dominó, pues el jugador o la pareja que es “mano” normalmente es la que tiene ventaja durante la ronda.
+En su turno, cada jugador debe colocar una de sus fichas en uno de los 2 extremos abiertos, de tal forma que los puntos de uno de los lados de la ficha coincida con los puntos del extremo donde se está colocando. Los dobles se colocan de forma transversal para facilitar su localización.
+
+Una vez que el jugador ha colocado la ficha en su lugar, su turno termina y pasa al siguiente jugador.
+
+Si un jugador no puede jugar, debe “robar” del pozo tantas fichas como sean necesarias. Si no quedan fichas en el pozo, pasará el turno al siguiente jugador.
